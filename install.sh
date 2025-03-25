@@ -15,16 +15,15 @@ After=network.target
 Wants=network-online.target
 
 [Service]
-Environment="FOO=bar baz"
-Environment="ENVIRONMENT=testnet"
-Environment="LOG_LEVEL=debug"
-Environment="LOG_PRETTY=false"
-Environment="EXECUTOR_PROCESS_BIDS_ENABLED=true"
-Environment="EXECUTOR_PROCESS_ORDERS_ENABLED=true"
-Environment="EXECUTOR_PROCESS_CLAIMS_ENABLED=true"
-Environment="EXECUTOR_MAX_L3_GAS_PRICE=30000"
-Environment="PRIVATE_KEY_LOCAL=$PK"
-Environment="ENABLED_NETWORKS='arbitrum-sepolia,base-sepolia,optimism-sepolia,l2rn'"
+Environment=\"ENVIRONMENT=testnet\"
+Environment=\"LOG_LEVEL=debug\"
+Environment=\"LOG_PRETTY=false\"
+Environment=\"EXECUTOR_PROCESS_BIDS_ENABLED=true\"
+Environment=\"EXECUTOR_PROCESS_ORDERS_ENABLED=true\"
+Environment=\"EXECUTOR_PROCESS_CLAIMS_ENABLED=true\"
+Environment=\"EXECUTOR_MAX_L3_GAS_PRICE=30000\"
+Environment=\"PRIVATE_KEY_LOCAL=$PK\"
+Environment=\"ENABLED_NETWORKS='arbitrum-sepolia,base-sepolia,optimism-sepolia,l2rn'\"
 User=root
 Group=root
 ExecStart=/root/t3rn/executor/executor/bin/executor
