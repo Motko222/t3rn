@@ -1,0 +1,40 @@
+#!/bin/bash
+
+path=$(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd)
+folder=$(echo $path | awk -F/ '{print $NF}')
+json=/root/logs/report-$folder
+status=/root/logs/$folder-status
+source ~/.bash_profile
+source $path/config
+
+version=
+service=$(sudo systemctl status $folder --no-pager | grep "active (running)" | wc -l)
+errors=$(journalctl -u $folder.service --since "1 day ago" --no-hostname -o cat | grep -c -E "rror|ERR")
+
+status="ok" && message="."
+[ $errors -gt 100 ] && status="warning" && message="errors=$errors";
+[ $service -ne 1 ] && status="error" && message="service not running";
+
+cat >$json << EOF
+{
+  "updated":"$(date --utc +%FT%TZ)",
+  "measurement":"report",
+  "tags": {
+       "id":"$folder",
+       "machine":"$MACHINE",
+       "grp":"node",
+       "owner":"$OWNER"
+  },
+  "fields": {
+        "chain":"?",
+        "network":"testnet",
+        "version":"$version",
+        "status":"$status",
+        "message":"$message",
+        "service":$service,
+        "errors":$errors
+  }
+}
+EOF
+
+cat $json | jq
