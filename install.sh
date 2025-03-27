@@ -14,12 +14,9 @@ cd t3rn
 wget https://github.com/t3rn/executor-release/releases/download/$tag/executor-linux-$tag.tar.gz
 tar -xzf executor-linux-$tag.tar.gz
 
-create env
+#create env
 cd $path
-if [ -f env ] then
-  cp env.sample env
-  nano env
-fi
+[ -f env ] || cp env.sample env && nano env
 
 #create service
 printf "[Unit]
