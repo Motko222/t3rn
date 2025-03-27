@@ -5,7 +5,7 @@ folder=$(echo $path | awk -F/ '{print $NF}')
 json=/root/logs/report-$folder
 status=/root/logs/$folder-status
 source ~/.bash_profile
-source $path/config
+source $path/env
 
 version=
 service=$(sudo systemctl status $folder --no-pager | grep "active (running)" | wc -l)
