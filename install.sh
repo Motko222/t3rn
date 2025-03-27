@@ -1,7 +1,10 @@
 path=$(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd) 
 folder=$(echo $path | awk -F/ '{print $NF}')
-source /$path/config 
+source /$path/env
 tag=v0.59.0
+
+read -p "Sure? " c
+case $c in y|Y) ;; *) exit ;; esac
 
 cd /root
 mkdir t3rn
