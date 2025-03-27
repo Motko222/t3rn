@@ -7,7 +7,7 @@ status=/root/logs/$folder-status
 source ~/.bash_profile
 source $path/env
 
-version=
+version=$(cat /root/logs/t3rn-version)
 service=$(sudo systemctl status $folder --no-pager | grep "active (running)" | wc -l)
 errors=$(journalctl -u $folder.service --since "1 day ago" --no-hostname -o cat | grep -c -E "rror|ERR")
 tx=$(journalctl -u $folder.service --since "1 day ago" --no-hostname -o cat | grep -c -E "Tx batch item successful")
