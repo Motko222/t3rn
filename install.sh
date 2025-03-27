@@ -6,11 +6,20 @@ tag=v0.59.0
 read -p "Sure? " c
 case $c in y|Y) ;; *) exit ;; esac
 
+#install binary
 cd /root
+[ -d t3rn ] && rm -r t3rn
 mkdir t3rn
 cd t3rn
 wget https://github.com/t3rn/executor-release/releases/download/$tag/executor-linux-$tag.tar.gz
 tar -xzf executor-linux-$tag.tar.gz
+
+create env
+cd $path
+if [ -f env ] then
+  cp env.sample env
+  nano env
+fi
 
 #create service
 printf "[Unit]
@@ -19,7 +28,7 @@ After=network.target
 Wants=network-online.target
 
 [Service]
-EnvironmentFile=/root/scripts/$folder/config
+EnvironmentFile=/root/scripts/$folder/env
 User=root
 Group=root
 ExecStart=/root/t3rn/executor/executor/bin/executor
