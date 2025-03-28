@@ -33,7 +33,8 @@ cat >$json << EOF
         "message":"$message",
         "service":$service,
         "errors":$errors,
-        "tx":$tx
+        "tx":$tx,
+        "url":"rpc=$RPC_PROVIDER"
   }
 }
 EOF
