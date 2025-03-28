@@ -3,7 +3,7 @@
 path=$(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd)
 folder=$(echo $path | awk -F/ '{print $NF}')
 json=/root/logs/report-$folder
-source ~/.bash_profile
+source /root/.bash_profile
 source $path/env
 
 version=$(cat /root/logs/t3rn-version)
