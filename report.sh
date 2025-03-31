@@ -12,7 +12,7 @@ errors=$(journalctl -u $folder.service --since "1 day ago" --no-hostname -o cat 
 tx=$(journalctl -u $folder.service --since "1 day ago" --no-hostname -o cat | grep -c -E "Tx batch item successful")
 
 status="ok" && message="tx=$tx"
-[ $errors -gt 1000 ] && status="warning" && message="errors=$errors tx=$tx";
+[ $errors -gt 50000 ] && status="warning" && message="errors=$errors tx=$tx";
 [ $service -ne 1 ] && status="error" && message="service not running";
 
 cat >$json << EOF
