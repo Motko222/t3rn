@@ -34,6 +34,7 @@ cat >$json << EOF
         "service":$service,
         "errors":$errors,
         "tx":$tx,
+        "gas":"$EXECUTOR_MAX_L3_GAS_PRICE",
         "url":"rpc=$RPC_PROVIDER"
   }
 }
