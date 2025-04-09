@@ -9,7 +9,7 @@ source $path/env
 version=$(cat /root/logs/t3rn-version)
 service=$(sudo systemctl status $folder --no-pager | grep "active (running)" | wc -l)
 errors=$(journalctl -u $folder.service --since "1 hour ago" --no-hostname -o cat | grep -c -E "rror|ERR")
-tx=$(journalctl -u $folder.service --since "1 day ago" --no-hostname -o cat | grep -c -E "Tx batch item successful")
+tx=$(journalctl -u $folder.service --since "1 day ago" --no-hostname -o cat | grep -c -E "Tx batch item successful|Tx single item successful")
 funds=$(journalctl -u t3rn-3.service --since "1 hour ago" --no-hostname -o cat | grep -E "INSUFFICIENT_FUNDS" | tail -1 | jq -r .networkId)
 
 status="ok" && message="tx=$tx gas=$EXECUTOR_MAX_L3_GAS_PRICE"
