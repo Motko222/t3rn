@@ -11,7 +11,7 @@ service=$(sudo systemctl status $folder --no-pager | grep "active (running)" | w
 errors=$(journalctl -u $folder.service --since "1 hour ago" --no-hostname -o cat | grep -c -E "rror|ERR")
 tx=$(journalctl -u $folder.service --since "1 day ago" --no-hostname -o cat | grep -c -E "Tx batch item successful|Tx single item successful")
 funds=$(journalctl -u t3rn-3.service --since "1 hour ago" --no-hostname -o cat | grep -E "INSUFFICIENT_FUNDS" | tail -1 | jq -r .networkId)
-balance=$(curl -sX 'GET' 'https://b2n.explorer.caldera.xyz/api/v2/addresses/'$WALLET -H 'accept: application/json' | jq -r .coin_balance | awk '{print $1/1000000000000000000}' | cut -d , -f 1)
+balance=$(curl -sX 'GET' 'https://b2n.explorer.caldera.xyz/api/v2/addresses/'$WALLET -H 'accept: application/json' | jq -r .coin_balance | awk '{ printf ("%.0f\n",$1/1000000000000000000) }')
 
 status="ok" && message="tx=$tx gas=$EXECUTOR_MAX_L3_GAS_PRICE bal=$balance"
 [ $errors -gt 50000 ] && status="warning" && message="errors=$errors tx=$tx";
