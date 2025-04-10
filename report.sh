@@ -40,7 +40,7 @@ cat >$json << EOF
         "gas":"$EXECUTOR_MAX_L3_GAS_PRICE",
         "url":"rpc=$RPC_PROVIDER",
         "balance":"$balance",
-        "funds":"$funds",
+        "insufficient_funds":"$funds"
   }
 }
 EOF
