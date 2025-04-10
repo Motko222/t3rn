@@ -13,7 +13,7 @@ tx=$(journalctl -u $folder.service --since "1 day ago" --no-hostname -o cat | gr
 funds=$(journalctl -u t3rn-3.service --since "1 hour ago" --no-hostname -o cat | grep -E "INSUFFICIENT_FUNDS" | tail -1 | jq -r .networkId)
 balance=$(curl -sX 'GET' 'https://b2n.explorer.caldera.xyz/api/v2/addresses/'$WALLET -H 'accept: application/json' | jq -r .coin_balance | awk '{print $1/1000000000000000000}' | cut -d , -f 1)
 
-status="ok" && message="tx=$tx gas=$EXECUTOR_MAX_L3_GAS_PRICE bal=$bal"
+status="ok" && message="tx=$tx gas=$EXECUTOR_MAX_L3_GAS_PRICE bal=$balance"
 [ $errors -gt 50000 ] && status="warning" && message="errors=$errors tx=$tx";
 [ ! -z $funds ] && status="warning" && message="tx=$tx insufficuent-funds=$funds";
 [ $service -ne 1 ] && status="error" && message="service not running";
