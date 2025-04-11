@@ -1,7 +1,7 @@
 path=$(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd) 
 folder=$(echo $path | awk -F/ '{print $NF}')
 source $path/env
-tag=v0.62.0
+tag=v0.63.1
 
 read -p "Sure? " c
 case $c in y|Y) ;; *) exit ;; esac
@@ -17,7 +17,8 @@ echo $tag >/root/logs/t3rn-version
 
 #create env
 cd $path
-[ -f env ] || cp env.sample env && nano env
+[ -f env ] || cp env.sample env
+nano env
 
 #create service
 printf "[Unit]
