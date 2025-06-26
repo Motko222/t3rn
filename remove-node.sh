@@ -6,8 +6,8 @@ folder=$(echo $path | awk -F/ '{print $NF}')
 cd $path
 ./stop.sh
 ./remove-service.sh
-cp /root/t3rn /root/backup
-cp /root/scripts/$folder /root/backup/scripts/$folder
+mv /root/t3rn /root/backup
+mv /root/scripts/$folder /root/backup/scripts/$folder
 
 cd /root/scripts/system
 ./influx-remove-id.sh $folder
