@@ -10,4 +10,4 @@ mv /root/t3rn /root/backup
 mv /root/scripts/$folder /root/backup/scripts/$folder
 
 cd /root/scripts/system
-./influx-remove-id.sh $folder
+./influx-delete-id.sh $folder
