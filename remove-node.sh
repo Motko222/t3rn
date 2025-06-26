@@ -7,7 +7,7 @@ cd $path
 ./stop.sh
 ./remove-service.sh
 mv /root/t3rn /root/backup
-mv /root/scripts/$folder /root/backup/scripts/$folder
+mv /root/scripts/$folder /root/backup/scripts
 
 cd /root/scripts/system
 ./influx-delete-id.sh $folder
